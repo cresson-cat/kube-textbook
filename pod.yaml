@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod
+  name: pod
+spec:
+  containers:
+    - image: nginx
+      name: pod
+      # # secret をまとめて追加する場合は以下
+      # # env -> envFrom
+      # envFrom:
+      #   # インデントに注意 -> name / prefix
+      #   - secretRef:
+      #       name: db-auth
+      #     prefix: DB_AUTH_
+      env:
+        - name: DB_USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: db-auth
+              key: username
+
+  restartPolicy: Never
