@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: volume-pod
+  name: volume-pod
+spec:
+  containers:
+    - image: nginx
+      name: volume-pod
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+    - name: config-volume
+      secret:
+        secretName: db-auth
+        # items を明示すると、明示したキーだけをマウントする
+        # items:
+        #   - key: username
+        #     path: username.txt
+  restartPolicy: Never
