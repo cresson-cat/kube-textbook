@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: cm-ws
+  name: cm-ws
+spec:
+  # # ローカルの 8080 ポートから pod の 8080 にポートフォワード
+  # $ kubectl port-forward cm-ws 8080:80
+  # # ローカルのブラウザで確認
+  # $ open http://localhost:8080/kurumi-01.png
+  containers:
+    - image: nginx
+      name: cm-ws
+      volumeMounts:
+        - name: binary-cm
+          mountPath: /usr/share/nginx/html
+  volumes:
+    - name: binary-cm
+      configMap:
+        name: binary-cm
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
