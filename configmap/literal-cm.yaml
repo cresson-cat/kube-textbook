@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: literal-cm
+data:
+  # 環境変数用
+  sample_env: test
+  # マウント用
+  env.sh: |-
+    #!/bin/bash
+    echo $SAMPLE_ENV
+    sleep infinity
