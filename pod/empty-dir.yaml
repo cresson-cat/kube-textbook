@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: empty-dir
+  name: empty-dir
+spec:
+  containers:
+    - image: nginx
+      name: empty-dir
+      volumeMounts:
+        - mountPath: /cache
+          name: cache-vol
+  volumes:
+    - name: cache-vol
+      # 一時ディレクトリを作成する
+      emptyDir:
+        # 以下 medium の指定で tmpfs を指定可
+        medium: Memory
+        # ダミーのファイル（Null文字埋め）を作成して上限確認
+        # dd if=/dev/zero of=/cache/dummy bs=1M count=129
+        sizeLimit: 128Mi
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
