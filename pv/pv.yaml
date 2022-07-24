@@ -1,16 +1,19 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume
+  name: pv
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
+    # hostPath はテスト用
+    # Node 上にディレクトリを作成しておく（minikube 想定のため /data でも良さそう）
     path: "/mnt/data"
 #
 # pv を dry-run する方法は無いらしい。k8s 公式からの取得を推奨
