@@ -22,5 +22,4 @@ spec:
             secretKeyRef:
               name: db-auth
               key: username
-
   restartPolicy: Never
