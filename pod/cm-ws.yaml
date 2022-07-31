@@ -12,6 +12,13 @@ spec:
   containers:
     - image: nginx
       name: cm-ws
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 500m
+        limits:
+          memory: 1024Mi
+          cpu: 1000m
       volumeMounts:
         - name: binary-cm
           mountPath: /usr/share/nginx/html

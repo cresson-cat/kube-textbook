@@ -10,6 +10,13 @@ spec:
   containers:
     - image: nginx
       name: check-cm
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 500m
+        limits:
+          memory: 1024Mi
+          cpu: 1000m
       # マウントされた cm のシェルを起動
       command: ["/config-vol/env.sh"]
       # cm を環境変数にする

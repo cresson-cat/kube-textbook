@@ -8,6 +8,13 @@ spec:
   containers:
     - image: nginx
       name: pod
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 500m
+        limits:
+          memory: 1024Mi
+          cpu: 1000m
       # # secret をまとめて追加する場合は以下
       # # env -> envFrom
       # # ※ 個々を指定する版と比較して、`name` が無い
