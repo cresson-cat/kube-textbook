@@ -8,6 +8,12 @@ spec:
   containers:
     - image: nginx
       name: mounted-pod
+      resources:
+        # requests / limit が指定可能。ただし、
+        # requests を省略した場合は、limits と同値になる
+        limits:
+          memory: 512Mi
+          cpu: 500m
       volumeMounts:
         - name: config-volume
           mountPath: /config

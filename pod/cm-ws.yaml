@@ -12,6 +12,12 @@ spec:
   containers:
     - image: nginx
       name: cm-ws
+      resources:
+        # requests / limit が指定可能。ただし、
+        # requests を省略した場合は、limits と同値になる
+        limits:
+          memory: 512Mi
+          cpu: 500m
       volumeMounts:
         - name: binary-cm
           mountPath: /usr/share/nginx/html
