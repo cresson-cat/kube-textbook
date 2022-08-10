@@ -9,12 +9,11 @@ spec:
     - image: nginx
       name: pod
       resources:
-        requests:
+        # requests / limit が指定可能。ただし、
+        # requests を省略した場合は、limits と同値になる
+        limits:
           memory: 512Mi
           cpu: 500m
-        limits:
-          memory: 1024Mi
-          cpu: 1000m
       # # secret をまとめて追加する場合は以下
       # # env -> envFrom
       # # ※ 個々を指定する版と比較して、`name` が無い

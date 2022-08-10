@@ -11,12 +11,11 @@ spec:
     - image: nginx
       name: check-cm
       resources:
-        requests:
+        # requests / limit が指定可能。ただし、
+        # requests を省略した場合は、limits と同値になる
+        limits:
           memory: 512Mi
           cpu: 500m
-        limits:
-          memory: 1024Mi
-          cpu: 1000m
       # マウントされた cm のシェルを起動
       command: ["/config-vol/env.sh"]
       # cm を環境変数にする
