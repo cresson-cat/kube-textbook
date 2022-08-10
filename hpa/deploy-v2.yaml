@@ -1,0 +1,26 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: deploy
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy
+  metrics:
+    - type: PodResource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+# 以下例の dry-run で作成
+# - apiVersion: autoscaling/v1 と生成されたため、v2 に変更
+#   - minikube で v2 は実行できなかった.. v2beta 等は未確認
+# ※ cpu / memory でのスケーリングは vpa で、hpa は別リソースに対して使った方が良いらしい
+# ---
+# # e.g.
+# $ kubectl autoscale deployment deploy --cpu-percent=50 --min=1 --max=10 \
+# > --dry-run=client -o yaml >./hpa/deploy.yaml
