@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy
+  name: deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy
+  template:
+    metadata:
+      labels:
+        app: deploy
+    spec:
+      containers:
+        - image: amsy810/tools
+          name: hpa
+          resources:
+            # limits だけ記載した場合（requests 未記載）requests = limits として扱われる
+            limits:
+              memory: 200Mi
+              cpu: 100m
