@@ -18,7 +18,8 @@ spec:
         - image: amsy810/tools
           name: hpa
           resources:
-            # limits だけ記載した場合（requests 未記載）requests = limits として扱われる
+            # requests / limit が指定可能。ただし、
+            # requests を省略した場合は、limits と同値になる
             limits:
               memory: 200Mi
               cpu: 100m
