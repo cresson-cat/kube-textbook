@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hpa-deploy
+  name: hpa-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hpa-deploy
+  template:
+    metadata:
+      labels:
+        app: hpa-deploy
+    spec:
+      containers:
+        - image: busybox
+          name: busybox
+          # ※ CPU を 100% 使用
+          command: ["dd", "if=/dev/zero", "of=/dev/null"]
+          resources:
+            # requests / limit が指定可能。ただし、
+            # requests を省略した場合は、limits と同値になる
+            limits:
+              memory: 500Mi
+              cpu: 200m
+            requests:
+              memory: 250Mi
+              cpu: 100m
