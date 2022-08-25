@@ -36,3 +36,7 @@ spec:
     - port: 80
   selector:
     run: php-apache
+#
+# 以下を参照して hpa の負荷を観察する
+# [CPU 負荷を与える](https://kubernetes.io/ja/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#%E8%B2%A0%E8%8D%B7%E3%81%AE%E5%A2%97%E5%8A%A0)
+#
