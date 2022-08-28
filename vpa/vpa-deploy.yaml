@@ -1,0 +1,29 @@
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+  name: vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: vpa-deploy
+  resourcePolicy:
+    containerPolicies:
+      - containerName: "no-vpa"
+        mode: "Off"
+      - containerName: "*"
+        mode: Auto
+        minAllowed:
+          memory: 300Mi
+        maxAllowed:
+          memory: 1000Mi
+        controlledResources: ["cpu", "memory"]
+#
+# 以下を minikube に導入した
+# - [release-0.8](https://github.com/kubernetes/autoscaler/tree/vpa-release-0.8)
+#
+# ```sh
+# git clone https://github.com/kubernetes/autoscaler.git
+# git checkout vpa-relase-0.8
+# ```
+#

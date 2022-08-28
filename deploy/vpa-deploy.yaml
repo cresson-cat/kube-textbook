@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vpa-deploy
+  name: vpa-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vpa-deploy
+  template:
+    metadata:
+      labels:
+        app: vpa-deploy
+    spec:
+      containers:
+        - image: amsy810/tools
+          name: vpa
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 200m
+            requests:
+              memory: 250Mi
+              cpu: 100m
+        - image: amsy810/tools
+          name: no-vpa
+          resources:
+            # requests / limit が指定可能。ただし、
+            # requests を省略した場合は、limits と同値になる
+            limits:
+              memory: 100Mi
+              cpu: 100m
